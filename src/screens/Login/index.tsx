@@ -2,11 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { 
     View, 
     Text, 
-    TextInput, 
-    Button,   
-    StyleSheet,
-    SafeAreaView,
-    Alert,
+    TextInput,
     TouchableOpacity,
     Image,
 } from 'react-native'
@@ -24,7 +20,7 @@ export const Login = () => {
             <Text style={Loginstyle.Label}>Senha</Text>
             <TextInput style={Loginstyle.Input}></TextInput>
             <Text style={Loginstyle.Textinho}>Esqueceu a senha ? =)</Text>
-            <TouchableOpacity onPress={() => navigation.navigate("Inicio")}>
+            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
                 <Text style={Loginstyle.ButtonText} >Login</Text>
             </TouchableOpacity>
             <View style={Loginstyle.separator}/>

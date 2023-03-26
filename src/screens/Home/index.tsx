@@ -7,8 +7,8 @@ export const Home = () => {
     return (
         <View style={Homestyle.View}>
             <Text style={Homestyle.Text}>Home</Text>
-            <TouchableOpacity style={Homestyle.Button}><Text style={Homestyle.Textbutton}>Cadastrar Pet</Text></TouchableOpacity>
-            <TouchableOpacity style={Homestyle.Button}><Text style={Homestyle.Textbutton}>Meus Pets</Text></TouchableOpacity>
+            <TouchableOpacity><Text style={Homestyle.Textbutton}>Cadastrar Pet</Text></TouchableOpacity>
+            <TouchableOpacity><Text style={Homestyle.Textbutton}>Meus Pets</Text></TouchableOpacity>
         </View>
     )
 }

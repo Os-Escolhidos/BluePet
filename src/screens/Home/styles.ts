@@ -5,6 +5,10 @@ export const Homestyle = StyleSheet.create({
         display: "flex",
         backgroundColor: "#76BDFF",
         height: "100%",
+        width:"100%",
+        alignSelf: "center",
+        alignItems:"center",
+        justifyContent:"center", 
     },
     Text: {
         alignSelf: "center",
@@ -12,17 +16,17 @@ export const Homestyle = StyleSheet.create({
         color: "#2C3877",
         marginTop: 40,
     },
-    Button: {
-        alignSelf: "center",
-        alignItems: "center",
-        width: 200,
-        height: 50,
-        borderRadius: 15,
-        marginTop: 30,
-        backgroundColor: "#257CFF", 
-    },
     Textbutton: {
-        color: "#ffffff",
-        fontSize: 25,
+        backgroundColor:"#257CFF",
+        color:"#fff",
+        width: "200px",
+        height: "35px",
+        borderRadius: 8,
+        borderColor: 'gray', 
+        borderWidth: 1,
+        fontSize: 18,
+        textAlign: 'center',
+        padding: '3px',
+        marginTop: '20px'
     }
 })

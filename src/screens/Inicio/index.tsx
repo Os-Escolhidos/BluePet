@@ -17,7 +17,7 @@ export const Inicio = () => {
             <TouchableOpacity onPress={() => navigation.navigate("Login")}>
                 <Text style={Iniciostyle.ButtonText} >Login</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("")}>
+            <TouchableOpacity onPress={() => navigation.navigate("CadastroUser")}>
                 <Text style={Iniciostyle.ButtonText} >Criar Conta</Text>
             </TouchableOpacity>
         </View>

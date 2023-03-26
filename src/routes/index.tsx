@@ -10,7 +10,7 @@ const { Navigator, Screen } = createNativeStackNavigator();
 const AppRoutes: React.FC = () => {
     return (
       <Navigator
-        initialRouteName="CadastroUser"
+        initialRouteName="Inicio"
         screenOptions={{
           headerShown: false,
         }}

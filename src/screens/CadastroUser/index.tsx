@@ -7,11 +7,15 @@ export const CadastroUser = () => {
     return (
         <View style={CadastroUserstyle.View}>
             <Text style={CadastroUserstyle.Text}>Cadastrar-se</Text>
-            <TextInput style={CadastroUserstyle.TextInput} placeholder="Nome:"></TextInput>
-            <TextInput style={CadastroUserstyle.TextInput} placeholder="E-mail:"></TextInput>
-            <TextInput style={CadastroUserstyle.TextInput} placeholder="CPF:"></TextInput>
-            <TextInput style={CadastroUserstyle.TextInput} placeholder="Telefone:"></TextInput>
-            <TouchableOpacity style={CadastroUserstyle.Button} onPress={() => navigation.navigate("Home")}><Text style={CadastroUserstyle.Textbutton}>Cadastrar</Text></TouchableOpacity>
+            <Text style={CadastroUserstyle.Label}>Nome</Text>
+            <TextInput style={CadastroUserstyle.TextInput}></TextInput>
+            <Text style={CadastroUserstyle.Label}>Email</Text>
+            <TextInput style={CadastroUserstyle.TextInput}></TextInput>
+            <Text style={CadastroUserstyle.Label}>Senha</Text>
+            <TextInput style={CadastroUserstyle.TextInput}></TextInput>
+            <Text style={CadastroUserstyle.Label}>Confirmar Senha</Text>
+            <TextInput style={CadastroUserstyle.TextInput}></TextInput>
+            <TouchableOpacity onPress={() => navigation.navigate("Home")}><Text style={CadastroUserstyle.Textbutton}>Cadastrar</Text></TouchableOpacity>
         </View>
     )
 }
