@@ -26,8 +26,8 @@ export const Loginstyle = StyleSheet.create({
 
     },
     Input: {
-        width: "288px",
-        height: "35px",
+        width: 288,
+        height: 35,
         backgroundColor: "#FFFFFF",
         borderRadius: 8,
         borderColor: 'gray', 
@@ -36,15 +36,15 @@ export const Loginstyle = StyleSheet.create({
     ButtonText: {
         backgroundColor:"#257CFF",
         color:"#fff",
-        width: "200px",
-        height: "35px",
+        width: 200,
+        height: 35,
         borderRadius: 8,
         borderColor: 'gray', 
         borderWidth: 1,
         fontSize: 18,
         textAlign: 'center',
-        padding: '3px',
-        marginTop: '8px'
+        padding: 3,
+        marginTop: 8
     },
 
     separator: {

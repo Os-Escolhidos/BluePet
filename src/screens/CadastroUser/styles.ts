@@ -21,8 +21,8 @@ export const CadastroUserstyle = StyleSheet.create({
         marginTop: 15,
     },
     TextInput: {
-        width: "288px",
-        height: "35px",
+        width: 288,
+        height: 35,
         backgroundColor: "#FFFFFF",
         borderRadius: 8,
         borderColor: 'gray', 
@@ -31,14 +31,14 @@ export const CadastroUserstyle = StyleSheet.create({
     Textbutton: {
         backgroundColor:"#257CFF",
         color:"#fff",
-        width: "200px",
-        height: "35px",
+        width: 200,
+        height: 35,
         borderRadius: 8,
         borderColor: 'gray', 
         borderWidth: 1,
         fontSize: 18,
         textAlign: 'center',
-        padding: '3px',
-        marginTop: '15px'
+        padding: 3,
+        marginTop: 15
     }
 })
