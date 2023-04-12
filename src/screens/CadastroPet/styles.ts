@@ -27,6 +27,7 @@ export const CadastroPetstyle = StyleSheet.create({
         borderRadius: 8,
         borderColor: 'gray', 
         borderWidth: 1,
+        padding: 8
     },
     Textbutton: {
         backgroundColor:"#257CFF",
