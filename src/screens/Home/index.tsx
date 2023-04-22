@@ -7,8 +7,9 @@ export const Home = () => {
     return (
         <View style={Homestyle.View}>
             <Text style={Homestyle.Text}>Home</Text>
-            <TouchableOpacity><Text style={Homestyle.Textbutton}>Cadastrar Pet</Text></TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("CadastroPet")}><Text style={Homestyle.Textbutton}>Cadastrar Pet</Text></TouchableOpacity>
             <TouchableOpacity><Text style={Homestyle.Textbutton}>Meus Pets</Text></TouchableOpacity>
         </View>
     )
 }
+

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 
-export const CadastroUserstyle = StyleSheet.create({
+export const CadastroPetstyle = StyleSheet.create({
     View: {
         display: "flex",
         backgroundColor: "#76BDFF",
