@@ -41,5 +41,10 @@ export const CadastroPetstyle = StyleSheet.create({
         textAlign: 'center',
         padding: 3,
         marginTop: 15
-    }
+    },
+    Erro: {
+        alignSelf: "center",
+        fontSize: 15,
+        color: "red",
+    },
 })

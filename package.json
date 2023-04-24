@@ -20,10 +20,10 @@
     "firebase": "^9.19.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-native": "0.71.4",
+    "react-native": "0.71.6",
     "react-native-masked-text": "^1.13.0",
     "react-native-multiple-select": "^0.5.12",
-    "react-native-svg": "^13.9.0",
+    "react-native-svg": "13.4.0",
     "react-native-web": "~0.18.10",
     "typescript": "^4.9.4"
   },

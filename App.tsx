@@ -1,11 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import './firebase'
 import { registerRootComponent } from "expo";
-
+import "./src/config/firebase";
 import { AppRoutes } from "./src/routes/index";
 
 import { NavigationContainer } from "@react-navigation/native";
+import React from 'react';
 
 export default function App() {
   return (
