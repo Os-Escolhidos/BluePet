@@ -16,30 +16,21 @@ export const CadastroUserstyle = StyleSheet.create({
         color: "#2C3877",
     },
     Label: {
-        fontSize: 18,
+        //fontSize: 18,
         color: "#2C3877",
-        marginTop: 15,
+        marginTop: 20,
     },
-    TextInput: {
+    Input: {
         width: 288,
-        height: 35,
         backgroundColor: "#FFFFFF",
         borderRadius: 8,
-        borderColor: 'gray', 
-        borderWidth: 1,
-        padding: 8
+        borderColor: "gray"
     },
-    Textbutton: {
+    Button: {
         backgroundColor:"#257CFF",
-        color:"#fff",
-        width: 200,
-        height: 35,
         borderRadius: 8,
-        borderColor: 'gray', 
-        borderWidth: 1,
-        fontSize: 18,
         textAlign: 'center',
-        padding: 3,
-        marginTop: 15
-    }
+        marginTop: 40,
+        width: 220
+    },
 })

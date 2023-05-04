@@ -1,24 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { registerRootComponent } from "expo";
 import "./src/config/firebase";
 import { AppRoutes } from "./src/routes/index";
-
 import { NavigationContainer } from "@react-navigation/native";
 import React from 'react';
+import { ApplicationProvider, Layout } from '@ui-kitten/components';
+import * as eva from '@eva-design/eva';
 
 export default function App() {
   return (
-    <View
-      style={{
-        flex: 1,
-      }}
-    >
-      <NavigationContainer>
-        <AppRoutes />
-      </NavigationContainer>
-    </View>
-
+    <ApplicationProvider {...eva} theme={eva.light}>
+      <Layout
+        style={{
+          flex: 1,
+        }}
+      >
+        <NavigationContainer>
+          <AppRoutes />
+        </NavigationContainer>
+      </Layout>
+    </ApplicationProvider>
   );
 }
 

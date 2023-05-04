@@ -1,21 +1,29 @@
 import { useNavigation } from '@react-navigation/native'
-import { View, Text, TextInput, TouchableOpacity } from 'react-native'
 import { CadastroUserstyle } from './styles'
+import { Button, Input, Layout, Text } from '@ui-kitten/components'
+import React from 'react'
 
 export const CadastroUser = () => {
     const navigation = useNavigation ()
     return (
-        <View style={CadastroUserstyle.View}>
-            <Text style={CadastroUserstyle.Text}>Cadastrar-se</Text>
-            <Text style={CadastroUserstyle.Label}>Nome</Text>
-            <TextInput style={CadastroUserstyle.TextInput}></TextInput>
-            <Text style={CadastroUserstyle.Label}>Email</Text>
-            <TextInput style={CadastroUserstyle.TextInput}></TextInput>
-            <Text style={CadastroUserstyle.Label}>Senha</Text>
-            <TextInput style={CadastroUserstyle.TextInput}></TextInput>
-            <Text style={CadastroUserstyle.Label}>Confirmar Senha</Text>
-            <TextInput style={CadastroUserstyle.TextInput}></TextInput>
-            <TouchableOpacity onPress={() => navigation.navigate("Home")}><Text style={CadastroUserstyle.Textbutton}>Cadastrar</Text></TouchableOpacity>
-        </View>
+        <Layout style={CadastroUserstyle.View}>
+            
+            <Text category='h1' style={CadastroUserstyle.Text}>Cadastrar-se</Text>
+
+            <Text category='h6' style={CadastroUserstyle.Label}>Nome</Text>
+            <Input style={CadastroUserstyle.Input}/>
+
+            <Text category='h6' style={CadastroUserstyle.Label}>Email</Text>
+            <Input style={CadastroUserstyle.Input}/>
+
+            <Text category='h6' style={CadastroUserstyle.Label}>Senha</Text>
+            <Input style={CadastroUserstyle.Input}/>
+
+            <Text category='h6' style={CadastroUserstyle.Label}>Confirmar Senha</Text>
+            <Input style={CadastroUserstyle.Input}/>
+
+            <Button size='large' style={CadastroUserstyle.Button} onPress={() => navigation.navigate("Home")}>CADASTRAR</Button>
+        
+        </Layout>
     )
 }
