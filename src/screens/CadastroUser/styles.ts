@@ -33,4 +33,10 @@ export const CadastroUserstyle = StyleSheet.create({
         marginTop: 40,
         width: 220
     },
+    InputSenha: {
+        width: 288,
+        backgroundColor: "#FFFFFF",
+        borderRadius: 8,
+        borderColor: "gray"
+    },
 })
