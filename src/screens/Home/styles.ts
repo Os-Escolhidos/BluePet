@@ -14,19 +14,13 @@ export const Homestyle = StyleSheet.create({
         alignSelf: "center",
         fontSize: 35,
         color: "#2C3877",
-        marginTop: 40,
+        marginTop: 20,
     },
-    Textbutton: {
+    Button: {
         backgroundColor:"#257CFF",
-        color:"#fff",
-        width: 200,
-        height: 35,
         borderRadius: 8,
-        borderColor: 'gray', 
-        borderWidth: 1,
-        fontSize: 18,
         textAlign: 'center',
-        padding: 3,
-        marginTop: 20
-    }
+        marginTop: 20,
+        width: 220
+    },
 })

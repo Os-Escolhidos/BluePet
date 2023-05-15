@@ -16,7 +16,6 @@ export const CadastroUserstyle = StyleSheet.create({
         color: "#2C3877",
     },
     Label: {
-        //fontSize: 18,
         color: "#2C3877",
         marginTop: 20,
     },

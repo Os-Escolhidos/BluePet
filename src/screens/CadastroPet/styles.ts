@@ -16,9 +16,8 @@ export const CadastroPetstyle = StyleSheet.create({
         color: "#2C3877",
     },
     Label: {
-        fontSize: 18,
         color: "#2C3877",
-        marginTop: 15,
+        marginTop: 20,
     },
     TextInput: {
         width: 288,
@@ -29,18 +28,12 @@ export const CadastroPetstyle = StyleSheet.create({
         borderWidth: 1,
         padding: 8
     },
-    Textbutton: {
+    Button: {
         backgroundColor:"#257CFF",
-        color:"#fff",
-        width: 200,
-        height: 35,
         borderRadius: 8,
-        borderColor: 'gray', 
-        borderWidth: 1,
-        fontSize: 18,
         textAlign: 'center',
-        padding: 3,
-        marginTop: 15
+        marginTop: 40,
+        width: 220
     },
     Erro: {
         alignSelf: "center",
