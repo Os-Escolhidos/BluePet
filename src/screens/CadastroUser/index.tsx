@@ -9,7 +9,7 @@ import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, updateP
 
 
 
-export const CadastroUser = () => {
+const CadastroUser: React.FC = () => {
     const navigation = useNavigation()
     const [password, setPassword] = useState("");
     const [passwordErroStyle, setPasswordErroStyle] = useState(false);
@@ -17,6 +17,7 @@ export const CadastroUser = () => {
     const [passwordMessageErro, setPasswordMessageErro] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const [secury, setSecure] = useState(true); 
 
     const erroLogs = (valueOfError: any) => {
         let erroLog = "";
@@ -24,8 +25,6 @@ export const CadastroUser = () => {
             return (erroLog = "ERRO");
         }
     }
-
-
 
     const [value, setValue] = useState({
         nome: "",
@@ -53,16 +52,13 @@ export const CadastroUser = () => {
                         id: String(prevUser?.uid),
                         name: value.nome,
                         email: value.email,
-                    })
+                    }).then(() => navigation.navigate("Login"))
                 })
                 .catch((err) => console.log(err));
             }
             catch (error: any) {
                 error = erroLogs(error.code);
                 setErrorMessage(error);
-            }
-            if (true) {
-                () => navigation.navigate("Home")
             }
         };
 
@@ -79,14 +75,14 @@ export const CadastroUser = () => {
                 <Input style={CadastroUserstyle.Input} value={value.email} onChangeText={(text) => setValue({ ...value, email: text })} />
 
                 <Text category='h6' style={CadastroUserstyle.Label}>Senha</Text>
-                <Input style={CadastroUserstyle.Input} value={password} placeholder={"Senha"} onChangeText={(text) => { setPassword(text), setValue({ ...value, senha: text }); }} />
+                <Input secureTextEntry={secury} style={CadastroUserstyle.Input} value={password} placeholder="Senha" onChangeText={(text) => { setPassword(text), setValue({ ...value, senha: text }); }} />
 
                 {passwordErroStyle ? (
                     <Text>{passwordMessageErro}</Text>
                 ) : null}
 
                 <Text category='h6' style={CadastroUserstyle.Label}>Confirmar Senha</Text>
-                <Input style={CadastroUserstyle.Input} value={confirmPassword} placeholder={"Confirmação de Senha"} onChangeText={(text) => setConfirmPassword(text)} />
+                <Input secureTextEntry={secury} style={CadastroUserstyle.Input} value={confirmPassword} placeholder="Confirmação de Senha" onChangeText={(text) => setConfirmPassword(text)} />
 
                 {passwordErroStyle ? (
                     <Text>{passwordMessageErro}</Text>
@@ -97,3 +93,5 @@ export const CadastroUser = () => {
             </Layout>
         )
     }
+
+export { CadastroUser };
