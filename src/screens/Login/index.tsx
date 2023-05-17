@@ -1,11 +1,39 @@
 import { useNavigation } from '@react-navigation/native';
 import { Loginstyle } from './styles'
 import { Layout, Text, Input, Button } from '@ui-kitten/components';
-import React from 'react';
-import { Image } from 'react-native'
+import React, { useEffect, useState } from "react";
+import { Image } from 'react-native';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
-export const Login = () => {
-    const navigation = useNavigation();
+const authFirebase = getAuth();
+const Login: React.FC = () => {
+    const navigation = useNavigation()
+    const [secury, setSecury] = useState(true);
+    const [errorMessage, setErrorMessage] = useState("");
+
+    const [value, setValue] = useState({
+        email: "",
+        senha: "",
+      });
+
+    async function Login() {
+        if (value.email === "" || value.senha === "") {
+          setValue({
+            ...value,
+          });
+          return;
+        }
+        try {
+          await signInWithEmailAndPassword(
+            authFirebase,
+            value.email,
+            value.senha
+          ).then(() => navigation.navigate("Home"));
+        } catch (error: any) {
+          console.log(error);
+          setErrorMessage(error);
+        }
+      }
 
     return (
         <Layout style={Loginstyle.View}>
@@ -14,14 +42,14 @@ export const Login = () => {
             <Image style={{width:250, height:250}} source={{uri:'https://cdn.discordapp.com/attachments/971523395818774569/1089640762683170876/14877551_3500_2_13-removebg-preview_1.png'}}></Image>
 
             <Text category='h6' style={Loginstyle.Label}>Email</Text>
-            <Input style={Loginstyle.Input}/>
+            <Input style={Loginstyle.Input} onChangeText={(text) => setValue({ ...value, email: text })} value={value.email} autoCorrect={false}/>
 
             <Text category='h6' style={Loginstyle.Label}>Senha</Text>
-            <Input style={Loginstyle.Input}/>
+            <Input style={Loginstyle.Input} onChangeText={(text) => setValue({ ...value, senha: text })} secureTextEntry={secury} value={value.senha} placeholder="Senha" autoCapitalize="none" autoCorrect={false}/>
 
             <Text category='c2' style={Loginstyle.Textinho}>Esqueceu a senha ? =)</Text>
 
-            <Button size='large' onPress={() => navigation.navigate("Home")} style={Loginstyle.Button}>LOGIN</Button>
+            <Button size='large' onPress={Login} style={Loginstyle.Button}>LOGIN</Button>
 
             <Layout style={Loginstyle.separator}/>
 
@@ -29,3 +57,4 @@ export const Login = () => {
         </Layout>
     )
 }
+export { Login };
