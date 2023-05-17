@@ -13,7 +13,7 @@ export const Home = () => {
             <Image style={{width:300, height:300}} source={{uri:'https://cdn.discordapp.com/attachments/971523395818774569/1107623132786855936/11766612_21378450-removebg-preview.png'}}></Image>
 
             <Button size='large' onPress={() => navigation.navigate("CadastroPet")} style={Homestyle.Button}>CADASTRAR PET</Button>
-            <Button size='large' style={Homestyle.Button}>MEUS PETS</Button>
+            <Button size='large' onPress={() => navigation.navigate("ListagemPet")} style={Homestyle.Button}>MEUS PETS</Button>
         </Layout>
     )
 }

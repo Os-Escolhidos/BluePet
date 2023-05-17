@@ -15,11 +15,11 @@ export const CadastroPet = () => {
     animal: "",
     raca: "",
     tipo: "",
-    dataNascimento: "",
+    idade: "",
     sexo: ""
   });
   async function handleRegister() {
-    if (value.nome === "" || value.animal === "" || value.raca === "" || value.tipo === "" || value.dataNascimento === "" || value.sexo === "") {
+    if (value.nome === "" || value.animal === "" || value.raca === "" || value.tipo === "" || value.idade === "" || value.sexo === "") {
       setErrorMessage("É necessário o preenchimento de todos os campos.");
       return;
     }
@@ -29,7 +29,7 @@ export const CadastroPet = () => {
         animal: value.animal,
         raca: value.raca,
         tipo: value.tipo,
-        dataNascimento: value.dataNascimento,
+        idade: value.idade,
         sexo: value.sexo
       }).then(() => navigation.navigate("Home"));
     }
@@ -56,8 +56,8 @@ export const CadastroPet = () => {
       <Text category='h6' style={CadastroPetstyle.Label}>Tipo</Text>
       <Input style={CadastroPetstyle.TextInput} onChangeText={(text) => setValue({ ...value, tipo: text })}></Input>
 
-      <Text category='h6' style={CadastroPetstyle.Label}>Data Nascimento</Text>
-      <Input style={CadastroPetstyle.TextInput} onChangeText={(text) => setValue({ ...value, dataNascimento: text })}></Input>
+      <Text category='h6' style={CadastroPetstyle.Label}>idade</Text>
+      <Input style={CadastroPetstyle.TextInput} onChangeText={(text) => setValue({ ...value, idade: text })}></Input>
 
       <Text category='h6' style={CadastroPetstyle.Label}>Sexo</Text>
       <Input style={CadastroPetstyle.TextInput} onChangeText={(text) => setValue({ ...value, sexo: text })}></Input>

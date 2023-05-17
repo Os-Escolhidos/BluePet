@@ -1,25 +1,21 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
 import { ListPetstyle } from './styles'
+import React from "react";
+import { Card, Layout } from "@ui-kitten/components";
+import { View, ViewProps } from 'react-native/types';
 
 export const ListPets = () => {
 
-
+  const Header = (props: ViewProps): React.ReactElement => (
+    <View {...props}>
+      
+    </View>
+  );
 
   return (
-    <View>
-      <Image
-        source={{}}
-        style={{}}
-      />
-      <View>
-        <Text>
-            Nome do pet
-        </Text>
-      </View>
-      <View>
-        <TouchableOpacity>
-        </TouchableOpacity>
-      </View>
-    </View>
+    <Layout>
+      <Card>
+
+      </Card>
+    </Layout>
   );
 };
