@@ -8,6 +8,7 @@ import { Home } from "../screens/HomeUser";
 import { ListSearchedPets } from "../screens/ListagemPet"
 import { HomeFunc } from "../screens/HomeFunc";
 import { CadastroServico } from "../screens/CadastroServico";
+import { CadastroFunc } from "../screens/CadastroFunc";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -21,6 +22,7 @@ const AppRoutes: React.FC = () => {
       >
         <Screen name="Home" component={Home} />
         <Screen name="CadastroUser" component={CadastroUser} />
+        <Screen name="CadastroFunc" component={CadastroFunc} />
         <Screen name="CadastroPet" component={CadastroPet} />
         <Screen name="Login" component={Login} />
         <Screen name="Inicio" component={Inicio} />

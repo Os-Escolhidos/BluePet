@@ -12,9 +12,9 @@ export const HomeFunc = () => {
 
             <Image style={{width:300, height:300}} source={{uri:'https://media.discordapp.net/attachments/971523395818774569/1108392279074414652/cachorro.png'}}></Image>
 
-            <Button size='large' onPress={() => navigation.navigate("CadastroServico")} style={HomeFuncstyle.Button}>CADASTRAR SERVIÇO</Button>
-            <Button size='large' onPress={() => navigation.navigate("ListagemPet")} style={HomeFuncstyle.Button}>SERVIÇOS CADASTRADOS</Button>
-            <Button size='large' onPress={() => navigation.navigate("CadastroPet")} style={HomeFuncstyle.Button}>CADASTRAR FUNCIONÁRIO</Button>
+            <Button size='large' onPress={() => navigation.navigate("CadastroServico")} style={HomeFuncstyle.Button}>CADASTRAR SERVIÇO OU PRODUTO</Button>
+            <Button size='large' onPress={() => navigation.navigate("ListagemPet")} style={HomeFuncstyle.Button}>SERVIÇOS E PRODUTOS CADASTRADOS</Button>
+            <Button size='large' onPress={() => navigation.navigate("CadastroFunc")} style={HomeFuncstyle.Button}>CADASTRAR FUNCIONÁRIO OU CLIENTE</Button>
             <Button size='large' onPress={() => navigation.navigate("ListagemPet")} style={HomeFuncstyle.Button}>FUNCIONÁRIOS CADASTRADOS</Button>
         </Layout>
     )

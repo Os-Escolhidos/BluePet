@@ -34,7 +34,7 @@ export const CadastroServico = () => {
 
   return (
     <Layout style={CadastroServicostyle.View}>
-      <Text category='h1' style={CadastroServicostyle.Text}>Cadastrar Pet</Text>
+      <Text category='h1' style={CadastroServicostyle.Text}>Cadastrar Serviço ou Produto</Text>
 
       {errorMessage ? <Text style={CadastroServicostyle.Erro}>{errorMessage}</Text> : null}
 

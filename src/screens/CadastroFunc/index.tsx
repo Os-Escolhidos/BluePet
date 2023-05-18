@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native'
-import { CadastroUserstyle } from './styles'
+import { CadastroFuncstyle } from './styles'
 import { Button, Input, Layout, Text } from '@ui-kitten/components'
 import React, { useState } from 'react'
 import "../../config/firebase"
@@ -9,7 +9,7 @@ import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, updateP
 
 
 
-const CadastroUser: React.FC = () => {
+const CadastroFunc: React.FC = () => {
     const navigation = useNavigation()
     const [password, setPassword] = useState("");
     const [passwordErroStyle, setPasswordErroStyle] = useState(false);
@@ -30,7 +30,7 @@ const CadastroUser: React.FC = () => {
         nome: "",
         email: "",
         senha: "",
-        nivel: "cliente"
+        nivel: "funcionario"
     });
     async function handleRegister() {
         setPasswordErroStyle(false);
@@ -54,7 +54,7 @@ const CadastroUser: React.FC = () => {
                         name: value.nome,
                         email: value.email,
                         nivel: value.nivel
-                    }).then(() => navigation.navigate("Login"))
+                    }).then(() => navigation.navigate("HomeFunc"))
                 })
                 .catch((err) => console.log(err));
             }
@@ -66,34 +66,34 @@ const CadastroUser: React.FC = () => {
 
 
         return (
-            <Layout style={CadastroUserstyle.View}>
+            <Layout style={CadastroFuncstyle.View}>
 
-                <Text category='h1' style={CadastroUserstyle.Text}>Cadastrar-se</Text>
+                <Text category='h1' style={CadastroFuncstyle.Text}>Cadastrar Funcionário</Text>
 
-                <Text category='h6' style={CadastroUserstyle.Label}>Nome</Text>
-                <Input style={CadastroUserstyle.Input} value={value.nome} onChangeText={(text) => setValue({ ...value, nome: text })} />
+                <Text category='h6' style={CadastroFuncstyle.Label}>Nome</Text>
+                <Input style={CadastroFuncstyle.Input} value={value.nome} onChangeText={(text) => setValue({ ...value, nome: text })} />
 
-                <Text category='h6' style={CadastroUserstyle.Label}>Email</Text>
-                <Input style={CadastroUserstyle.Input} value={value.email} onChangeText={(text) => setValue({ ...value, email: text })} />
+                <Text category='h6' style={CadastroFuncstyle.Label}>Email</Text>
+                <Input style={CadastroFuncstyle.Input} value={value.email} onChangeText={(text) => setValue({ ...value, email: text })} />
 
-                <Text category='h6' style={CadastroUserstyle.Label}>Senha</Text>
-                <Input secureTextEntry={secury} style={CadastroUserstyle.Input} value={password} placeholder="Senha" onChangeText={(text) => { setPassword(text), setValue({ ...value, senha: text }); }} />
-
-                {passwordErroStyle ? (
-                    <Text>{passwordMessageErro}</Text>
-                ) : null}
-
-                <Text category='h6' style={CadastroUserstyle.Label}>Confirmar Senha</Text>
-                <Input secureTextEntry={secury} style={CadastroUserstyle.Input} value={confirmPassword} placeholder="Confirmação de Senha" onChangeText={(text) => setConfirmPassword(text)} />
+                <Text category='h6' style={CadastroFuncstyle.Label}>Senha</Text>
+                <Input secureTextEntry={secury} style={CadastroFuncstyle.Input} value={password} placeholder="Senha" onChangeText={(text) => { setPassword(text), setValue({ ...value, senha: text }); }} />
 
                 {passwordErroStyle ? (
                     <Text>{passwordMessageErro}</Text>
                 ) : null}
 
-                <Button size='large' style={CadastroUserstyle.Button} onPress={handleRegister}>CADASTRAR</Button>
+                <Text category='h6' style={CadastroFuncstyle.Label}>Confirmar Senha</Text>
+                <Input secureTextEntry={secury} style={CadastroFuncstyle.Input} value={confirmPassword} placeholder="Confirmação de Senha" onChangeText={(text) => setConfirmPassword(text)} />
+
+                {passwordErroStyle ? (
+                    <Text>{passwordMessageErro}</Text>
+                ) : null}
+
+                <Button size='large' style={CadastroFuncstyle.Button} onPress={handleRegister}>CADASTRAR</Button>
 
             </Layout>
         )
     }
 
-export { CadastroUser };
+export { CadastroFunc };
