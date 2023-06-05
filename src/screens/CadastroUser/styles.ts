@@ -14,6 +14,7 @@ export const CadastroUserstyle = StyleSheet.create({
         alignSelf: "center",
         fontSize: 50,
         color: "#2C3877",
+        marginTop: 40
     },
     Label: {
         color: "#2C3877",
@@ -30,6 +31,7 @@ export const CadastroUserstyle = StyleSheet.create({
         borderRadius: 8,
         textAlign: 'center',
         marginTop: 40,
+        marginBottom: 30,
         width: 220
     },
     InputSenha: {

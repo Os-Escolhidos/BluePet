@@ -49,11 +49,10 @@ const ListSearchedPets = () => {
     findAllPets()
   }, [user?.uid])
 
-  console.log(Pets[0].body)
   return (
     <Layout style={ListPetstyle.View}>
         {
-          Pets[0].body.map(i => {
+          Pets && Pets[0]?.body?.map(i => {
             return(
               <Card>
                 <Text>{i.animal}</Text>
