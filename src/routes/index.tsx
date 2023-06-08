@@ -6,6 +6,7 @@ import { CadastroUser } from "../screens/CadastroUser";
 import { CadastroPet } from "../screens/CadastroPet";
 import { Home } from "../screens/HomeUser";
 import { ListSearchedPets } from "../screens/ListagemPet"
+import { ListSearchedServicos } from "../screens/ListagemServico"
 import { HomeFunc } from "../screens/HomeFunc";
 import { CadastroServico } from "../screens/CadastroServico";
 import { CadastroFunc } from "../screens/CadastroFunc";
@@ -27,6 +28,7 @@ const AppRoutes: React.FC = () => {
         <Screen name="Login" component={Login} />
         <Screen name="Inicio" component={Inicio} />
         <Screen name="ListagemPet" component={ListSearchedPets} />
+        <Screen name="ListagemServico" component={ListSearchedServicos} />
         <Screen name="HomeFunc" component={HomeFunc} />
         <Screen name="CadastroServico" component={CadastroServico} />
       </Navigator>
