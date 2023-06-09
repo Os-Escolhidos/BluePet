@@ -12,14 +12,10 @@ import { doc, deleteDoc } from "firebase/firestore";
 
 
 
-interface Ipets {
+interface Ifunc {
   body: {
-    animal: String;
-    idade: String;
     nome: String;
-    raca: String;
-    tipo: String;
-    sexo: String;
+    email: String;
     img: {
       url: String;
     }
@@ -28,30 +24,30 @@ interface Ipets {
 
 const ListSearchedPets = () => {
 
-  const [Pets, setPets] = useState<Ipets[]>([])
+  const [Func, setFunc] = useState<Ifunc[]>([])
   const { user } = useAuthentication()
   const navigation = useNavigation();
   const [refreshing, setRefreshing] = useState(false);
 
 
-  const findAllPets = useCallback(
+  const findAllFunc = useCallback(
     async () => {
-      setPets([]);
-      let petsData: any[] = [];
-      const collect = collection(db, `usuarios`);
+      setFunc([]);
+      let funcData: any[] = [];
+      const collect = collection(db, `funcionarios`);
       const queryFilterDate = query(
         collect, where("id", "==", String(user?.uid))
       );
       const querySnapshot = await getDocs(queryFilterDate);
       querySnapshot.forEach((doc) => {
-        petsData.push({
+        funcData.push({
           id: doc.id,
           body: doc.data().pets,
         });
       });
-      setPets(petsData);
+      setFunc(funcData);
     },
-    [setPets, user]
+    [setFunc, user]
   );
 
   const DeleteDog = async (idUser: any, iddog: any) => {
@@ -63,13 +59,13 @@ const ListSearchedPets = () => {
     await updateDoc(refDatabase, {
       pets: updatedGruposArray
     });
-    findAllPets();
+    findAllFunc();
   }
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    setPets([])
-    findAllPets()
+    setFunc([])
+    findAllFunc()
     setTimeout(() => {
       setRefreshing(false);
     }, 1000);
