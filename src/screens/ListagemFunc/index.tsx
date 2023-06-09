@@ -40,14 +40,14 @@ const ListSearchedPets = () => {
       );
       const querySnapshot = await getDocs(queryFilterDate);
       querySnapshot.forEach((doc) => {
-        petsData.push({
+        funcData.push({
           id: doc.id,
           body: doc.data().pets,
         });
       });
-      setPets(petsData);
+      setFunc(funcData);
     },
-    [setPets, user]
+    [setFunc, user]
   );
 
   const DeleteDog = async (idUser: any, iddog: any) => {
@@ -59,13 +59,13 @@ const ListSearchedPets = () => {
     await updateDoc(refDatabase, {
       pets: updatedGruposArray
     });
-    findAllPets();
+    findAllFunc();
   }
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    setPets([])
-    findAllPets()
+    setFunc([])
+    findAllFunc()
     setTimeout(() => {
       setRefreshing(false);
     }, 1000);

@@ -1,13 +1,29 @@
 import { useNavigation } from '@react-navigation/native'
 import { CadastroFuncstyle } from './styles'
-import { Button, Input, Layout, Text } from '@ui-kitten/components'
+import { Button, IndexPath, Input, Layout, Select, SelectItem, Text } from '@ui-kitten/components'
 import React, { useState } from 'react'
 import "../../config/firebase"
 import { addDoc, collection, doc, setDoc } from "firebase/firestore";
-import { db } from '../../config/firebase';
+import { db, storage } from '../../config/firebase';
 import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, updateProfile, } from 'firebase/auth'
+import { ScrollView } from "react-native";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { launchImageLibraryAsync, MediaTypeOptions } from "expo-image-picker";
+import { uuidv4 } from "@firebase/util";
 
+interface ISendFiles {
+    mimeType: string;
+    name: string;
+    size: number;
+    type: string;
+    uri: string;
+}
 
+interface IFiles {
+    id: string;
+    url: string;
+    type: string;
+}
 
 const CadastroFunc: React.FC = () => {
     const navigation = useNavigation()
@@ -17,7 +33,9 @@ const CadastroFunc: React.FC = () => {
     const [passwordMessageErro, setPasswordMessageErro] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
-    const [secury, setSecure] = useState(true); 
+    const [secury, setSecure] = useState(true);
+    const [imageSelect, setImageSelect] = useState<ISendFiles>();
+    const [loading, setLoading] = useState(false);
 
     const erroLogs = (valueOfError: any) => {
         let erroLog = "";
@@ -26,11 +44,22 @@ const CadastroFunc: React.FC = () => {
         }
     }
 
+    const data = [
+        'cliente',
+        'funcionario'
+    ];
+
     const [value, setValue] = useState({
         nome: "",
         email: "",
         senha: "",
-        nivel: "funcionario"
+        telefone: "",
+        cpf: "",
+        estado: "",
+        cidade: "",
+        bairro: "",
+        numero: "",
+        nivel: ""
     });
     async function handleRegister() {
         setPasswordErroStyle(false);
@@ -45,6 +74,7 @@ const CadastroFunc: React.FC = () => {
             return;
         }
         try {
+            const Foto = await UploadSingleImage(imageSelect)
             await createUserWithEmailAndPassword(auth, value.email, value.senha)
                 .then(async (result) => {
                     const prevUser = auth.currentUser;
@@ -53,19 +83,57 @@ const CadastroFunc: React.FC = () => {
                         id: String(prevUser?.uid),
                         name: value.nome,
                         email: value.email,
-                        nivel: value.nivel
+                        telefone: value.telefone,
+                        cpf: value.cpf,
+                        estado: value.estado,
+                        cidade: value.cidade,
+                        bairro: value.bairro,
+                        numero: value.numero,
+                        nivel: value.nivel,
+                        img: {
+                            id: Foto.id,
+                            url: Foto.url
+                        }
                     }).then(() => navigation.navigate("HomeFunc"))
                 })
                 .catch((err) => console.log(err));
-            }
-            catch (error: any) {
-                error = erroLogs(error.code);
-                setErrorMessage(error);
-            }
+        }
+        catch (error: any) {
+            error = erroLogs(error.code);
+            setErrorMessage(error);
+        }
+    };
+
+    const pickImage = async () => {
+        let result: any = await launchImageLibraryAsync({
+            mediaTypes: MediaTypeOptions.Images,
+            videoQuality: 1,
+            allowsMultipleSelection: false,
+            quality: 1,
+        });
+        if (result.canceled) {
+            return;
+        } else {
+            setImageSelect(result.assets[0]);
+            setLoading(true);
+        }
+    };
+
+    const UploadSingleImage = async (image: ISendFiles) => {
+        const id = uuidv4();
+        const response = await fetch(image.uri);
+        const blob = await response.blob();
+        const imageRef = ref(storage, `images/${id}`);
+        const uploadStatus = uploadBytesResumable(imageRef, blob);
+        const snapshot = await uploadStatus;
+        return {
+            id,
+            url: await getDownloadURL(snapshot.ref),
         };
+    };
 
-
-        return (
+    return (
+        <ScrollView>
             <Layout style={CadastroFuncstyle.View}>
 
                 <Text category='h1' style={CadastroFuncstyle.Text}>Cadastrar Funcionário</Text>
@@ -75,6 +143,30 @@ const CadastroFunc: React.FC = () => {
 
                 <Text category='h6' style={CadastroFuncstyle.Label}>Email</Text>
                 <Input style={CadastroFuncstyle.Input} value={value.email} onChangeText={(text) => setValue({ ...value, email: text })} />
+
+                <Text category='h6' style={CadastroFuncstyle.Label}>Telefone</Text>
+                <Input style={CadastroFuncstyle.Input} value={value.telefone} onChangeText={(text) => setValue({ ...value, telefone: text })} />
+
+                <Text category='h6' style={CadastroFuncstyle.Label}>CPF</Text>
+                <Input style={CadastroFuncstyle.Input} value={value.cpf} onChangeText={(text) => setValue({ ...value, cpf: text })} />
+
+                <Text category='h6' style={CadastroFuncstyle.Label}>Estado</Text>
+                <Input style={CadastroFuncstyle.Input} value={value.estado} onChangeText={(text) => setValue({ ...value, estado: text })} />
+
+                <Text category='h6' style={CadastroFuncstyle.Label}>Cidade</Text>
+                <Input style={CadastroFuncstyle.Input} value={value.cidade} onChangeText={(text) => setValue({ ...value, cidade: text })} />
+
+                <Text category='h6' style={CadastroFuncstyle.Label}>Bairro</Text>
+                <Input style={CadastroFuncstyle.Input} value={value.bairro} onChangeText={(text) => setValue({ ...value, bairro: text })} />
+
+                <Text category='h6' style={CadastroFuncstyle.Label}>Número</Text>
+                <Input style={CadastroFuncstyle.Input} value={value.numero} onChangeText={(text) => setValue({ ...value, numero: text })} />
+
+                <Text category='h6' style={CadastroFuncstyle.Label}>Nivel</Text>
+                {/* <Select style={CadastroFuncstyle.Input} selectedIndex={selectedIndex} onSelect={index => setSelectedIndex(index)}>
+                    <SelectItem title='cliente' />
+                    <SelectItem title='funcionario' />
+                </Select> */}
 
                 <Text category='h6' style={CadastroFuncstyle.Label}>Senha</Text>
                 <Input secureTextEntry={secury} style={CadastroFuncstyle.Input} value={password} placeholder="Senha" onChangeText={(text) => { setPassword(text), setValue({ ...value, senha: text }); }} />
@@ -90,10 +182,13 @@ const CadastroFunc: React.FC = () => {
                     <Text>{passwordMessageErro}</Text>
                 ) : null}
 
+                <Button size='large' onPress={pickImage} style={CadastroFuncstyle.Button}>ADICIONAR IMAGEM</Button>
+
                 <Button size='large' style={CadastroFuncstyle.Button} onPress={handleRegister}>CADASTRAR</Button>
 
             </Layout>
-        )
-    }
+        </ScrollView>
+    )
+}
 
 export { CadastroFunc };
