@@ -13,6 +13,7 @@ import { doc, deleteDoc } from "firebase/firestore";
 
 
 interface Ipets {
+  id: String;
   body: {
     animal: String;
     idade: String;
@@ -32,6 +33,8 @@ const ListSearchedPets = () => {
   const { user } = useAuthentication()
   const navigation = useNavigation();
   const [refreshing, setRefreshing] = useState(false);
+  const [editingPetId, setEditingPetId] = useState<string | null>(null);
+  const [editingPetData, setEditingPetData] = useState<any>(null);
 
 
   const findAllPets = useCallback(
@@ -75,6 +78,35 @@ const ListSearchedPets = () => {
     }, 1000);
   }, []);
 
+  const startEditing = async (petId: string) => {
+    try {
+      const petRef = doc(collection(db, "usuarios"), user?.uid, "pets", petId);
+      const petSnapshot = await getDoc(petRef);
+      const petData = petSnapshot.data();
+      setEditingPetData(petData);
+      setEditingPetId(petId);
+    } catch (error) {
+      console.error("Erro ao obter os dados do pet:", error);
+    }
+  };
+
+  const cancelEditing = () => {
+    setEditingPetId(null);
+    setEditingPetData(null);
+  };
+
+  const updatePet = async (petId: string, updatedPetData: any) => {
+    try {
+      const petRef = doc(collection(db, "usuarios"), user?.uid, "pets", petId);
+      await updateDoc(petRef, { body: updatedPetData });
+      setEditingPetData(null);
+      setEditingPetId(null);
+      console.log("Pet atualizado com sucesso!");
+    } catch (error) {
+      console.error("Erro ao atualizar o pet:", error);
+    }
+  };
+
   useEffect(() => {
     findAllPets()
   }, [user?.uid])
@@ -107,8 +139,9 @@ const ListSearchedPets = () => {
                     appearance='outline'
                     status='info'
                     size='tiny'
+                    onPress={() => startEditing(i.id)}
                   >
-                    INFO
+                    UPDATE
                   </Button>
                   <Button
                     style={ListPetstyle.button}

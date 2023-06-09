@@ -15,7 +15,6 @@ import { useAuthentication } from "../hooks";
 const { Navigator, Screen } = createNativeStackNavigator();
 
 const AppRoutes: React.FC = () => {
-<<<<<<< HEAD
   const { user } = useAuthentication()
   return (user ? (<Navigator
     initialRouteName="Home"
@@ -44,27 +43,3 @@ const AppRoutes: React.FC = () => {
 };
 
 export { AppRoutes };
-=======
-    return (
-      <Navigator
-        initialRouteName="Inicio"
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
-        <Screen name="Home" component={Home} />
-        <Screen name="CadastroUser" component={CadastroUser} />
-        <Screen name="CadastroFunc" component={CadastroFunc} />
-        <Screen name="CadastroPet" component={CadastroPet} />
-        <Screen name="Login" component={Login} />
-        <Screen name="Inicio" component={Inicio} />
-        <Screen name="ListagemPet" component={ListSearchedPets} />
-        <Screen name="ListagemServico" component={ListSearchedServicos} />
-        <Screen name="HomeFunc" component={HomeFunc} />
-        <Screen name="CadastroServico" component={CadastroServico} />
-      </Navigator>
-    );
-  };
-  
-  export { AppRoutes };
->>>>>>> 26f88622c347935792b97e3bf0189326d4be3f39
