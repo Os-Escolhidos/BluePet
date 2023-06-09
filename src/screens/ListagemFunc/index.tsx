@@ -12,14 +12,10 @@ import { doc, deleteDoc } from "firebase/firestore";
 
 
 
-interface Ipets {
+interface Ifunc {
   body: {
-    animal: String;
-    idade: String;
     nome: String;
-    raca: String;
-    tipo: String;
-    sexo: String;
+    email: String;
     img: {
       url: String;
     }
@@ -28,17 +24,17 @@ interface Ipets {
 
 const ListSearchedPets = () => {
 
-  const [Pets, setPets] = useState<Ipets[]>([])
+  const [Func, setFunc] = useState<Ifunc[]>([])
   const { user } = useAuthentication()
   const navigation = useNavigation();
   const [refreshing, setRefreshing] = useState(false);
 
 
-  const findAllPets = useCallback(
+  const findAllFunc = useCallback(
     async () => {
-      setPets([]);
-      let petsData: any[] = [];
-      const collect = collection(db, `usuarios`);
+      setFunc([]);
+      let funcData: any[] = [];
+      const collect = collection(db, `funcionarios`);
       const queryFilterDate = query(
         collect, where("id", "==", String(user?.uid))
       );
