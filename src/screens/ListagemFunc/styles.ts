@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 
-export const ListPetstyle = StyleSheet.create({
+export const ListFuncstyle = StyleSheet.create({
     View: {
         display: "flex",
         backgroundColor: "#76BDFF",
@@ -9,6 +9,13 @@ export const ListPetstyle = StyleSheet.create({
         alignItems: "flex-start",
         justifyContent: "flex-start",
         paddingTop: "15%",
+    },
+
+    Texto: {
+        alignSelf: "center",
+        fontSize: 35,
+        color: "#2C3877",
+        marginTop: 20,
     },
 
     Corpocard: {
@@ -21,7 +28,7 @@ export const ListPetstyle = StyleSheet.create({
 
     organizacao: {
         display: "flex",
-        flexDirection: "row",
+        flexDirection: "column",
     },
 
     Fotinha: {
@@ -34,9 +41,7 @@ export const ListPetstyle = StyleSheet.create({
         borderColor: '#3299CC',
     },
 
-    Texto: {
-
-    },
+    
     sla: {
         width: "100%",
     },

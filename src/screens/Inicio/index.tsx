@@ -17,7 +17,7 @@ export const Inicio = () => {
             <Button size='large' style={Iniciostyle.Button} onPress={() => navigation.navigate("Login")}>LOGIN</Button>
             <Button size='large' style={Iniciostyle.Button} onPress={() => navigation.navigate("CadastroUser")}>CRIAR CONTA</Button>
             <Button size='large' style={Iniciostyle.Button} onPress={() => navigation.navigate("HomeFunc")}>HOME FUNCIONÁRIO</Button>
-        
+            
         </Layout>
     )
 }

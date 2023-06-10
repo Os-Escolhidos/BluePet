@@ -34,9 +34,7 @@ export const ListPetstyle = StyleSheet.create({
         borderColor: '#3299CC',
     },
 
-    Texto: {
-
-    },
+    
     sla: {
         width: "100%",
     },

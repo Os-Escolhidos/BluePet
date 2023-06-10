@@ -59,6 +59,7 @@ const ListSearchedPets = () => {
     },
     [setPets, user]
   );
+  
 
   const DeleteDog = async (idUser: any, iddog: any) => {
     const refDatabase = doc(collection(db, "usuarios"), idUser);

@@ -1,129 +1,111 @@
-import { useNavigation, useRoute } from "@react-navigation/native";
-import { ListPets } from "../../components/ListPets";
-import { ListPetstyle } from './styles'
-import { Avatar, Button, Card, Layout, Text } from "@ui-kitten/components/ui";
-import React, { useCallback, useEffect, useState } from "react";
-import { collection, getDoc, getDocs, query, updateDoc, where } from "firebase/firestore";
+import React, { useState, useEffect, useCallback } from 'react';
+import { View, Image, RefreshControl } from 'react-native';
+import { collection, query, where, getDocs, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { database, db } from "../../config/firebase";
-import { useAuthentication } from "../../config/autentication";
-import { ImageBackground, View, Image, RefreshControl } from 'react-native';
+import { Avatar, Button, Card, Layout, Text } from "@ui-kitten/components/ui";
+import { ListFuncstyle } from './styles'
 import { ScrollView } from "react-native";
-import { doc, deleteDoc } from "firebase/firestore";
 
 
 
-interface Ifunc {
-  body: {
-    nome: String;
-    email: String;
-    img: {
-      url: String;
-    }
-  }[]
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  estado: string;
 }
 
-const ListSearchedPets = () => {
-
-  const [Func, setFunc] = useState<Ifunc[]>([])
-  const { user } = useAuthentication()
-  const navigation = useNavigation();
+const ListSearchedFunc = () => {
+  const [users, setUsers] = useState<User[]>([]);
   const [refreshing, setRefreshing] = useState(false);
 
 
-  const findAllFunc = useCallback(
-    async () => {
-      setFunc([]);
-      let funcData: any[] = [];
-      const collect = collection(db, `funcionarios`);
-      const queryFilterDate = query(
-        collect, where("id", "==", String(user?.uid))
-      );
-      const querySnapshot = await getDocs(queryFilterDate);
-      querySnapshot.forEach((doc) => {
-        petsData.push({
-          id: doc.id,
-          body: doc.data().pets,
-        });
-      });
-      setPets(petsData);
-    },
-    [setPets, user]
-  );
 
-  const DeleteDog = async (idUser: any, iddog: any) => {
-    const refDatabase = doc(collection(db, "usuarios"), idUser);
-    const querySnapshot = await getDoc(refDatabase)
-    const userData = querySnapshot.data();
-    const gruposArray = userData?.pets || [];
-    const updatedGruposArray = gruposArray.filter((item: any) => item.nome !== iddog);
-    await updateDoc(refDatabase, {
-      pets: updatedGruposArray
+  const findEmployeeUsers = useCallback(async () => {
+    setUsers([]);
+    let usersData: User[] = [];
+    const usersCollection = collection(db, 'usuarios');
+    const querySnapshot = await getDocs(query(usersCollection, where('nivel', '==', 'funcionario')));
+
+    querySnapshot.forEach((doc) => {
+      usersData.push({
+        id: doc.id,
+        name: doc.data().name,
+        email: doc.data().email,
+        estado: doc.data().estado,
+      });
     });
-    findAllPets();
-  }
+
+    setUsers(usersData);
+  }, [setUsers]);
+
+
+  const banido = useCallback(async (userId: string) => {
+    try {
+      await deleteDoc(doc(db, 'usuarios', userId));
+      console.log('Funcionário excluído com sucesso!');
+      // Atualize a lista de funcionários após a exclusão
+      findEmployeeUsers();
+    } catch (error) {
+      console.error('Erro ao excluir o funcionário:', error);
+    }
+  }, [findEmployeeUsers]);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    setPets([])
-    findAllPets()
+    setUsers([])
+    findEmployeeUsers()
     setTimeout(() => {
       setRefreshing(false);
     }, 1000);
   }, []);
 
   useEffect(() => {
-    findAllPets()
-  }, [user?.uid])
+    findEmployeeUsers();
+  }, [findEmployeeUsers]);
 
   return (
-    <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} style={ListPetstyle.sla}>
-      <Layout style={ListPetstyle.View}>
-
-        {
-          Pets && Pets[0]?.body?.map(i => {
-            return (
-              <Card style={ListPetstyle.Corpocard}>
-                <View style={ListPetstyle.organizacao}>
-                  <Image
-                    style={ListPetstyle.Fotinha}
-                    source={{ uri: i.img.url }}
-                  />
-                  <View>
-                    <Text>Nome: {i.nome}</Text>
-                    <Text>Animal: {i.animal}</Text>
-                    <Text>Raça: {i.raca}</Text>
-                    <Text>Idade: {i.idade}</Text>
-                    <Text>Porte: {i.tipo}</Text>
-                    <Text>Sexo: {i.sexo}</Text>
-                  </View>
-                </View>
-                <View style={ListPetstyle.slaa}>
+    <Layout style={ListFuncstyle.View}>
+      <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
+        <Text category='h1' style={ListFuncstyle.Texto}>Usuários Funcionários</Text>
+        {users && users.map((user) => (
+          <Card style={ListFuncstyle.Corpocard}>
+            <View style={ListFuncstyle.organizacao}>
+              <View key={user.id}>
+                {/* <Image
+                style={ListFuncstyle.Fotinha}
+                source={{ uri: user.img.url }}
+                /> */}
+                <Text>Nome: {user.name}</Text>
+                <Text>Email: {user.email}</Text>
+                <Text>Estado: {user.estado}</Text>
+              </View>
+            </View>
+            <View style={ListFuncstyle.slaa}>
                   <Button
-                    style={ListPetstyle.button}
+                    style={ListFuncstyle.button}
                     appearance='outline'
                     status='info'
                     size='tiny'
+                    /* onPress={() => handleSelectedUser(index)} */
                   >
-                    INFO
+                    UPDATE
                   </Button>
                   <Button
-                    style={ListPetstyle.button}
+                    style={ListFuncstyle.button}
                     appearance='outline'
                     status='danger'
                     size='tiny'
-                    onPress={() => { DeleteDog(user?.uid, i.nome) }}
+                    onPress={() => banido(user.id)}
                   >
                     DELETE
                   </Button>
                 </View>
-              </Card>
-            )
-          })
-        }
-
-      </Layout>
-    </ScrollView>
+          </Card>
+        ))}
+      </ScrollView>
+    </Layout>
   );
 };
 
-export { ListSearchedPets };
+export { ListSearchedFunc };
