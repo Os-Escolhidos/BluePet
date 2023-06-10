@@ -49,6 +49,9 @@ export const ListPetstyle = StyleSheet.create({
         justifyContent: "flex-end",
         gap: 5,
     },
+    slaaa: {
+        height: 1000,
+    },
 
     button: {
         width: 75,
