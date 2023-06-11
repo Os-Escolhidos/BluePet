@@ -22,16 +22,19 @@ export const ListServstyle = StyleSheet.create({
         display: "flex",
         flexDirection: "column",
         width: 345,
-        height: 188,
+        height: 208,
     },
 
     Textoneh: {
         height: 100,
     },
 
+    Textoneh2: {
+        height: 200,
+    },
+
     Textotitules: {
         display: "flex",
-        marginLeft: -5,
         justifyContent: "flex-start",
     },
 
@@ -56,7 +59,6 @@ export const ListServstyle = StyleSheet.create({
         width: "100%",
     },
     slaa: {
-        marginLeft: -8,
         marginTop: "8%",
         display: "flex",
         width: "100%",
@@ -69,6 +71,6 @@ export const ListServstyle = StyleSheet.create({
     },
 
     button: {
-        width: 75,
+        width: 100,
     },
 })
