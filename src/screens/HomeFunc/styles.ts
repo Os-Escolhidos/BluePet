@@ -14,7 +14,7 @@ export const HomeFuncstyle = StyleSheet.create({
         alignSelf: "center",
         fontSize: 35,
         color: "#2C3877",
-        marginTop: 20,
+        marginTop: 38,
     },
     Button: {
         backgroundColor:"#257CFF",

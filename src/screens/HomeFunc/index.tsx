@@ -18,8 +18,7 @@ export const HomeFunc = () => {
                 <Button size='large' onPress={() => navigation.navigate("CadastroServico")} style={HomeFuncstyle.Button}>CADASTRAR SERVIÇO OU PRODUTO</Button>
                 <Button size='large' onPress={() => navigation.navigate("ListagemServico")} style={HomeFuncstyle.Button}>SERVIÇOS E PRODUTOS CADASTRADOS</Button>
                 <Button size='large' onPress={() => navigation.navigate("CadastroFunc")} style={HomeFuncstyle.Button}>CADASTRAR FUNCIONÁRIO OU CLIENTE</Button>
-                <Button size='large' onPress={() => navigation.navigate("ListagemPet")} style={HomeFuncstyle.Button}>FUNCIONÁRIOS CADASTRADOS</Button>
-                <Button size='large' onPress={() => navigation.navigate("ListagemFunc")} style={HomeFuncstyle.Button} >LISTAGEM FUNCIONÁRIOS</Button>
+                <Button size='large' onPress={() => navigation.navigate("ListagemFunc")} style={HomeFuncstyle.Button} >FUNCIONÁRIOS CADASTRADOS</Button>
             </Layout>
         </ScrollView>
     )
