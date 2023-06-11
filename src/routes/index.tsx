@@ -10,6 +10,7 @@ import { ListSearchedServicos } from "../screens/ListagemServico"
 import { HomeFunc } from "../screens/HomeFunc";
 import { CadastroServico } from "../screens/CadastroServico";
 import { CadastroFunc } from "../screens/CadastroFunc";
+import { AgendarConsulta } from "../screens/AgendarConsulta";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -31,6 +32,7 @@ const AppRoutes: React.FC = () => {
         <Screen name="ListagemServico" component={ListSearchedServicos} />
         <Screen name="HomeFunc" component={HomeFunc} />
         <Screen name="CadastroServico" component={CadastroServico} />
+        <Screen name="AgendarConsulta" component={AgendarConsulta} />
       </Navigator>
     );
   };

@@ -36,6 +36,18 @@ const CadastroFunc: React.FC = () => {
     const [secury, setSecure] = useState(true);
     const [imageSelect, setImageSelect] = useState<ISendFiles>();
     const [loading, setLoading] = useState(false);
+    const [photoError, setPhotoError] = useState("");
+    const [photoErrorstyle, setPhotoErrorstyle] = useState(false);
+
+    const data = [
+        'cliente',
+        'funcionario'
+    ];
+    const [selectedIndex, setSelectedIndex] = useState<IndexPath>(new IndexPath(0));
+    const displayValue = data[selectedIndex.row];
+    const renderOption = (title, index) => (
+        <SelectItem key={index} title={title} />
+    );
 
     const erroLogs = (valueOfError: any) => {
         let erroLog = "";
@@ -44,10 +56,6 @@ const CadastroFunc: React.FC = () => {
         }
     }
 
-    const data = [
-        'cliente',
-        'funcionario'
-    ];
 
     const [value, setValue] = useState({
         nome: "",
@@ -59,7 +67,8 @@ const CadastroFunc: React.FC = () => {
         cidade: "",
         bairro: "",
         numero: "",
-        nivel: ""
+        img: null,
+        nivel: data[selectedIndex.row]
     });
     async function handleRegister() {
         setPasswordErroStyle(false);
@@ -73,8 +82,19 @@ const CadastroFunc: React.FC = () => {
             setErrorMessage("É necessário o preenchimento de todos os campos.");
             return;
         }
+        if (value.nivel === 'funcionario' && !imageSelect) {
+            setPhotoError("É necessário selecionar uma foto")
+            setPhotoErrorstyle(true);
+            return;
+        }
         try {
-            const Foto = await UploadSingleImage(imageSelect)
+            if (imageSelect) {
+                const Foto = await UploadSingleImage(imageSelect);
+                value.img = {
+                    id: Foto.id,
+                    url: Foto.url,
+                };
+            }
             await createUserWithEmailAndPassword(auth, value.email, value.senha)
                 .then(async (result) => {
                     const prevUser = auth.currentUser;
@@ -90,10 +110,7 @@ const CadastroFunc: React.FC = () => {
                         bairro: value.bairro,
                         numero: value.numero,
                         nivel: value.nivel,
-                        img: {
-                            id: Foto.id,
-                            url: Foto.url
-                        }
+                        img: value.img
                     }).then(() => navigation.navigate("HomeFunc"))
                 })
                 .catch((err) => console.log(err));
@@ -163,26 +180,33 @@ const CadastroFunc: React.FC = () => {
                 <Input style={CadastroFuncstyle.Input} value={value.numero} onChangeText={(text) => setValue({ ...value, numero: text })} />
 
                 <Text category='h6' style={CadastroFuncstyle.Label}>Nivel</Text>
-                {/* <Select style={CadastroFuncstyle.Input} selectedIndex={selectedIndex} onSelect={index => setSelectedIndex(index)}>
-                    <SelectItem title='cliente' />
-                    <SelectItem title='funcionario' />
-                </Select> */}
+                <Select style={CadastroFuncstyle.Input} value={displayValue} selectedIndex={selectedIndex} onSelect={(index) => {
+                    setSelectedIndex(index as IndexPath);
+                    setValue({ ...value, nivel: data[(index as IndexPath).row] });
+                    setPhotoErrorstyle(false);
+                }}>
+                    {data.map(renderOption)}
+                </Select>
 
                 <Text category='h6' style={CadastroFuncstyle.Label}>Senha</Text>
                 <Input secureTextEntry={secury} style={CadastroFuncstyle.Input} value={password} placeholder="Senha" onChangeText={(text) => { setPassword(text), setValue({ ...value, senha: text }); }} />
 
                 {passwordErroStyle ? (
-                    <Text>{passwordMessageErro}</Text>
+                    <Text style={CadastroFuncstyle.erro}>{passwordMessageErro}</Text>
                 ) : null}
 
                 <Text category='h6' style={CadastroFuncstyle.Label}>Confirmar Senha</Text>
                 <Input secureTextEntry={secury} style={CadastroFuncstyle.Input} value={confirmPassword} placeholder="Confirmação de Senha" onChangeText={(text) => setConfirmPassword(text)} />
 
                 {passwordErroStyle ? (
-                    <Text>{passwordMessageErro}</Text>
+                    <Text style={CadastroFuncstyle.erro}>{passwordMessageErro}</Text>
                 ) : null}
 
                 <Button size='large' onPress={pickImage} style={CadastroFuncstyle.Button}>ADICIONAR IMAGEM</Button>
+
+                {photoErrorstyle ? (
+                    <Text style={CadastroFuncstyle.erro}>{photoError}</Text>
+                ) : null}
 
                 <Button size='large' style={CadastroFuncstyle.Button} onPress={handleRegister}>CADASTRAR</Button>
 

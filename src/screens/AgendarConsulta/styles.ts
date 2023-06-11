@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 
-export const CadastroFuncstyle = StyleSheet.create({
+export const AgendarConsultastyle = StyleSheet.create({
     View: {
         display: "flex",
         backgroundColor: "#76BDFF",
@@ -19,27 +19,25 @@ export const CadastroFuncstyle = StyleSheet.create({
         color: "#2C3877",
         marginTop: 20,
     },
-    Input: {
+    TextInput: {
         width: 288,
+        height: 35,
         backgroundColor: "#FFFFFF",
         borderRadius: 8,
-        borderColor: "gray"
+        borderColor: 'gray', 
+        borderWidth: 1,
+        padding: 8
     },
     Button: {
         backgroundColor:"#257CFF",
         borderRadius: 8,
         textAlign: 'center',
         marginTop: 40,
-        marginBottom: 30,
         width: 220
     },
-    InputSenha: {
-        width: 288,
-        backgroundColor: "#FFFFFF",
-        borderRadius: 8,
-        borderColor: "gray"
+    Erro: {
+        alignSelf: "center",
+        fontSize: 15,
+        color: "red",
     },
-    erro: {
-        color: "red"
-    }
 })
