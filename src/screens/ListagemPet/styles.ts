@@ -24,6 +24,13 @@ export const ListPetstyle = StyleSheet.create({
         flexDirection: "row",
     },
 
+    organizacao2: {
+        marginTop: "2%",
+        display: "flex",
+        flexDirection: "row",
+        gap: 5,
+    },
+
     Fotinha: {
         padding: 0,
         marginRight: 22,
@@ -46,9 +53,6 @@ export const ListPetstyle = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "flex-end",
         gap: 5,
-    },
-    slaaa: {
-        height: 1000,
     },
 
     button: {

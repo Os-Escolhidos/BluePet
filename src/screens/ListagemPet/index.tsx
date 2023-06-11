@@ -59,7 +59,7 @@ const ListSearchedPets = () => {
     },
     [setPets, user]
   );
-  
+
 
   const DeleteDog = async (idUser: any, iddog: any) => {
     const refDatabase = doc(collection(db, "usuarios"), idUser);
@@ -138,36 +138,75 @@ const ListSearchedPets = () => {
               <Card style={ListPetstyle.Corpocard}>
                 {openedMenu[index] ? (
                   // Modo de edição - renderizar campos de edição
-                  <View style={ListPetstyle.slaaa}>
-                    <Input
-                      label="Nome"
-                      value={editingPetData?.body?.nome || ''}
-                      onChangeText={(text) =>
-                        setEditingPetData({ ...editingPetData, body: { ...editingPetData?.body, nome: text } })
-                      }
-                    />
-                    
-                    <Button></Button>
-                    <Button
-                      style={ListPetstyle.button}
-                      appearance='outline'
-                      status='info'
-                      size='tiny'
-                      onPress={() => updatePet(editingPetId, editingPetData)}>
-                      Confirmar
-                    </Button>
+                  <View>
+                    <View>
+                      <Input
+                        label="Nome"
+                        value={editingPetData?.body?.nome || ''}
+                        onChangeText={(text) =>
+                          setEditingPetData({ ...editingPetData, body: { ...editingPetData?.body, nome: text } })
+                        }
+                      />
+                      {/* <Input
+                        label="Animal"
+                        value={editingPetData?.body?.animal || ''}
+                        onChangeText={(text) =>
+                          setEditingPetData({ ...editingPetData, body: { ...editingPetData?.body, animal: text } })
+                        }
+                      />
+                      <Input
+                        label="Raça"
+                        value={editingPetData?.body?.raca || ''}
+                        onChangeText={(text) =>
+                          setEditingPetData({ ...editingPetData, body: { ...editingPetData?.body, raca: text } })
+                        }
+                      />
+                      <Input
+                        label="Idade"
+                        value={editingPetData?.body?.idade || ''}
+                        onChangeText={(text) =>
+                          setEditingPetData({ ...editingPetData, body: { ...editingPetData?.body, idade: text } })
+                        }
+                      />
+                      <Input
+                        label="Porte"
+                        value={editingPetData?.body?.tipo || ''}
+                        onChangeText={(text) =>
+                          setEditingPetData({ ...editingPetData, body: { ...editingPetData?.body, tipo: text } })
+                        }
+                      />
+                      <Input
+                        label="Sexo"
+                        value={editingPetData?.body?.sexo || ''}
+                        onChangeText={(text) =>
+                          setEditingPetData({ ...editingPetData, body: { ...editingPetData?.body, sexo: text } })
+                        }
+                      /> */}
+                    </View>
+                    <View style={ListPetstyle.organizacao2}>
+                      <Button
+                        style={ListPetstyle.button}
+                        appearance='outline'
+                        status='info'
+                        size='tiny'
+                        onPress={() => updatePet(editingPetId, editingPetData)}>
+                        Confirmar
+                      </Button>
 
-                    {/* Adicione um botão para cancelar a edição */}
-                    <Button
-                      style={ListPetstyle.button}
-                      appearance='outline'
-                      status='danger'
-                      size='tiny'
-                      onPress={() => handleSelectedUser(index)}
-                    >
-                      Cancelar
-                    </Button>
+                      {/* Adicione um botão para cancelar a edição */}
+                      <Button
+                        style={ListPetstyle.button}
+                        appearance='outline'
+                        status='danger'
+                        size='tiny'
+                        onPress={() => handleSelectedUser(index)}
+                      >
+                        Cancelar
+                      </Button>
+                    </View>
+
                   </View>
+
                 ) : (
                   // Modo de exibição - renderizar informações estáticas
                   <View style={ListPetstyle.organizacao}>
@@ -255,4 +294,4 @@ export { ListSearchedPets };
                         }
                       /> */}
 
-                    {/* Adicione um botão para confirmar a atualização */}
+{/* Adicione um botão para confirmar a atualização */ }

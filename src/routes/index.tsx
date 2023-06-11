@@ -59,6 +59,7 @@ import { CadastroServico } from "../screens/CadastroServico";
 import { CadastroFunc } from "../screens/CadastroFunc";
 import { ListSearchedFunc } from "../screens/ListagemFunc";
 import { AgendarConsulta } from "../screens/AgendarConsulta";
+import { PgUser } from "../screens/PaginaUsuario";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -82,6 +83,7 @@ const AppRoutes: React.FC = () => {
         <Screen name="CadastroServico" component={CadastroServico} />
         <Screen name="ListagemFunc" component={ListSearchedFunc} />   
         <Screen name="AgendarConsulta" component={AgendarConsulta} />
+        <Screen name="PaginaUsuario" component={PgUser} />
       </Navigator>
     );
   };
