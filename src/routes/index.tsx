@@ -80,6 +80,7 @@ const AppRoutes: React.FC = () => {
         <Screen name="ListagemServico" component={ListSearchedServicos} />
         <Screen name="HomeFunc" component={HomeFunc} />
         <Screen name="CadastroServico" component={CadastroServico} />
+        <Screen name="ListagemFunc" component={ListSearchedFunc} />   
         <Screen name="AgendarConsulta" component={AgendarConsulta} />
       </Navigator>
     );
