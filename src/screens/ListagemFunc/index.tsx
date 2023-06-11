@@ -13,6 +13,10 @@ interface User {
   name: string;
   email: string;
   estado: string;
+  img: {
+    id: string;
+    url: string;
+  };
 }
 
 const ListSearchedFunc = () => {
@@ -33,6 +37,7 @@ const ListSearchedFunc = () => {
         name: doc.data().name,
         email: doc.data().email,
         estado: doc.data().estado,
+        img: doc.data().img,
       });
     });
 
@@ -67,40 +72,43 @@ const ListSearchedFunc = () => {
   return (
     <Layout style={ListFuncstyle.View}>
       <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
-        <Text category='h1' style={ListFuncstyle.Texto}>Usuários Funcionários</Text>
+        <Text  style={ListFuncstyle.Texto}>Usuários Funcionários</Text>
         {users && users.map((user) => (
           <Card style={ListFuncstyle.Corpocard}>
-            <View style={ListFuncstyle.organizacao}>
-              <View key={user.id}>
-                {/* <Image
-                style={ListFuncstyle.Fotinha}
-                source={{ uri: user.img.url }}
-                /> */}
-                <Text>Nome: {user.name}</Text>
-                <Text>Email: {user.email}</Text>
-                <Text>Estado: {user.estado}</Text>
-              </View>
-            </View>
-            <View style={ListFuncstyle.slaa}>
-                  <Button
-                    style={ListFuncstyle.button}
-                    appearance='outline'
-                    status='info'
-                    size='tiny'
-                    /* onPress={() => handleSelectedUser(index)} */
-                  >
-                    UPDATE
-                  </Button>
-                  <Button
-                    style={ListFuncstyle.button}
-                    appearance='outline'
-                    status='danger'
-                    size='tiny'
-                    onPress={() => banido(user.id)}
-                  >
-                    DELETE
-                  </Button>
+            <View key={user.id} style={ListFuncstyle.organizacao}>
+              {user.img?.url &&
+                <Image
+                  style={ListFuncstyle.Fotinha}
+                  source={{ uri: user.img.url }}
+                />}
+              <ScrollView>
+                <View style={ListFuncstyle.Textoneh}>
+                  <Text>Nome: {user.name}</Text>
+                  <Text>Email: {user.email}</Text>
+                  <Text>Estado: {user.estado}</Text>
                 </View>
+              </ScrollView>
+            </View>
+              <View style={ListFuncstyle.slaa}>
+                <Button
+                  style={ListFuncstyle.button}
+                  appearance='outline'
+                  status='info'
+                  size='tiny'
+                /* onPress={() => handleSelectedUser(index)} */
+                >
+                  UPDATE
+                </Button>
+                <Button
+                  style={ListFuncstyle.button}
+                  appearance='outline'
+                  status='danger'
+                  size='tiny'
+                  onPress={() => banido(user.id)}
+                >
+                  DELETE
+                </Button>
+              </View>
           </Card>
         ))}
       </ScrollView>

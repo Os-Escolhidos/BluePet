@@ -26,16 +26,21 @@ export const ListFuncstyle = StyleSheet.create({
         height: 188,
     },
 
+    Textoneh: {
+        marginTop: "8%",
+        height: 100,
+    },
+
     organizacao: {
         display: "flex",
-        flexDirection: "column",
+        flexDirection: "row",
     },
 
     Fotinha: {
         padding: 0,
-        marginRight: 22,
-        width: 88.8,
-        height: 88.8,
+        marginRight: 29,
+        width: 90,
+        height: 90,
         marginTop: 25,
         borderWidth: 2,
         borderColor: '#3299CC',
