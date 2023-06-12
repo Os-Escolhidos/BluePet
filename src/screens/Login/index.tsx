@@ -4,12 +4,22 @@ import { Layout, Text, Input, Button } from '@ui-kitten/components';
 import React, { useEffect, useState } from "react";
 import { Image } from 'react-native';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { collection, doc, getDoc } from 'firebase/firestore';
+import { db } from '../../config/firebase';
 
 const authFirebase = getAuth();
 const Login: React.FC = () => {
     const navigation = useNavigation()
     const [secury, setSecury] = useState(true);
     const [errorMessage, setErrorMessage] = useState("");
+
+    const GetDocUsuario = async (usuarioUid) => {
+      const collect = doc(collection(db, "usuarios"), usuarioUid);
+      const querySnapshot = await getDoc(collect);
+      const userData = querySnapshot.data();
+
+      return userData.nivel
+  }
 
     const [value, setValue] = useState({
         email: "",
@@ -28,7 +38,19 @@ const Login: React.FC = () => {
             authFirebase,
             value.email,
             value.senha
-          ).then(() => navigation.navigate("Home"));
+          ).then(async () => {
+            const prevUser = authFirebase.currentUser;
+            const nivelUser = await GetDocUsuario(String(prevUser?.uid)).then((res) => res)
+
+            setValue({email: '', senha: ''})
+
+            if (nivelUser === "cliente") {
+                navigation.navigate("Home");
+            }
+            else {
+                navigation.navigate("HomeFunc")
+            }
+        });
         } catch (error: any) {
           console.log(error);
           setErrorMessage(error);

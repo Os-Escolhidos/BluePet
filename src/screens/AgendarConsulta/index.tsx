@@ -2,19 +2,27 @@ import { useNavigation } from '@react-navigation/native'
 import { AgendarConsultastyle } from './styles'
 import "../../config/firebase"
 import React, { useState } from 'react';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, arrayUnion, collection, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import { Layout, Text, Input, Button, Datepicker } from '@ui-kitten/components/ui';
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { Platform } from 'react-native';
+import { AndroidMode } from '@react-native-community/datetimepicker';
+import { useAuthentication } from '../../config/autentication';
+import { uuidv4 } from "@firebase/util";
 
 export const AgendarConsulta = () => {
+  const { user } = useAuthentication()
   const navigation = useNavigation()
   const [errorMessage, setErrorMessage] = useState("");
   const [date, setDate] = useState(new Date());
-  const [mode, setMode] = useState('date');
+  const [mode, setMode] = useState<AndroidMode>('date');
   const [show, setShow] = useState(false);
   const [text, setText] = useState('Empty');
+  const [data, setData] = useState({
+    horario: "",
+    dia: ""
+  })
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -23,10 +31,17 @@ export const AgendarConsulta = () => {
 
     let tempDate = new Date(currentDate);
     let fDate = tempDate.getDate() + '/' + (tempDate.getMonth() + 1) + '/' + tempDate.getFullYear();
-    let fTime = 'Hours: ' + tempDate.getHours() + ' | Minutes: ' + tempDate.getMinutes();
-    setText(fDate + '\n' + fTime)
+    let fTime = tempDate.getHours() + ':' + tempDate.getMinutes();
+    setText('Data: '+ fDate + '\n' + 'Horário: ' + fTime)
 
+    setData({
+      horario: fTime,
+      dia: fDate
+    })
     console.log(fDate + ' (' + fTime + ')')
+    if (Platform.OS === 'android') {
+      setShow(false);
+    }
   }
 
   const showMode = (currentMode) => {
@@ -34,31 +49,42 @@ export const AgendarConsulta = () => {
     setMode(currentMode);
   }
 
+  const hidePicker = () => {
+    setShow(false);
+  };
+
   const [value, setValue] = useState({
     data: "",
     horario:""
   });
   async function handleRegister() {
-    if (value.data === "" || value.horario === "") {
+    if (data.dia === "" || data.horario === "") {
       setErrorMessage("É necessário o preenchimento de todos os campos.");
       return;
     }
     try {
-      await addDoc(collection(db, "consultas"), {
-        data: value.data,
-        horario: value.horario,
-      }).then(() => navigation.navigate("HomeFunc"));
+      const refDoc = doc(db, `usuarios`, String(user.uid))
+      const consultaRef = collection(db, `consultas`)
+      const uid = uuidv4()
+      await addDoc (consultaRef, {
+        idCli: String(user.uid),
+        id: uid,
+        data: data.dia,
+        horario: data.horario,
+        email: user?.email
+      })
+       await updateDoc(refDoc, {
+        consultas: arrayUnion({
+        id: uid,
+        data: data.dia,
+        horario: data.horario
+      })
+      }).then(() => navigation.navigate("Home"));
     }
     catch (error: any) {
       setErrorMessage(error);
     }
   }
-
-  const handleDateSelect = (nextDate) => {
-    const formattedDate = nextDate.toLocaleDateString(); // Format the date as desired
-    setValue({ ...value, data: formattedDate });
-    setDate(nextDate);
-  };
 
   return (
     <Layout style={AgendarConsultastyle.View}>
@@ -66,11 +92,23 @@ export const AgendarConsulta = () => {
 
       {errorMessage ? <Text style={AgendarConsultastyle.Erro}>{errorMessage}</Text> : null}
 
-      <Text category='h6' style={AgendarConsultastyle.Label}>Data</Text>
-      <Datepicker date={date} onSelect={handleDateSelect}></Datepicker>
+      <Button style={AgendarConsultastyle.Button} onPress={() => showMode('date')}>DATA</Button>
 
-      <Text category='h6' style={AgendarConsultastyle.Label}>Horário</Text>
-      <Input style={AgendarConsultastyle.TextInput} onChangeText={(text) => setValue({ ...value, horario: text })}></Input>
+      <Button style={AgendarConsultastyle.Button} onPress={() => showMode('time')}>HORÁRIO</Button>
+
+      <Text category='h6' style={AgendarConsultastyle.Label}>{text}</Text>
+
+      {show && (
+        <DateTimePicker
+          testID='dateTimePicker'
+          value={date}
+          mode={mode}
+          is24Hour={true}
+          display='default'
+          onChange={onChange}
+          onHide={hidePicker}
+        />
+      )}
 
       <Button size='large' onPress={handleRegister} style={AgendarConsultastyle.Button}>AGENDAR</Button>
     </Layout>

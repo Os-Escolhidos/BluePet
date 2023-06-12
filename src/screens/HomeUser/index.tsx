@@ -15,6 +15,7 @@ export const Home = () => {
             <Button size='large' onPress={() => navigation.navigate("CadastroPet")} style={Homestyle.Button}>CADASTRAR PET</Button>
             <Button size='large' onPress={() => navigation.navigate("ListagemPet")} style={Homestyle.Button}>MEUS PETS</Button>
             <Button size='large' onPress={() => navigation.navigate("AgendarConsulta")} style={Homestyle.Button}>AGENDAR CONSULTA</Button>
+            <Button size='large' onPress={() => navigation.navigate("ListagemConsultasUser")} style={Homestyle.Button}>MINHAS CONSULTAS</Button>
         </Layout>
     )
 }
